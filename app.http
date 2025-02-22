@@ -1,0 +1,82 @@
+### Login admin user
+POST http://localhost:9090/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "123"
+}
+
+### Login manager user
+POST http://localhost:9090/auth/login
+Content-Type: application/json
+
+{
+  "username": "Wikicoding",
+  "password": "123"
+}
+
+### Login technician user
+POST http://localhost:9090/auth/login
+Content-Type: application/json
+
+{
+  "username": "PO1",
+  "password": "123"
+}
+
+### Register user (Admin role)
+POST http://localhost:9090/auth/register
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc0MDIzNzEyNCwiZXhwIjoxNzQwMjQwNzI0fQ.gC_rqnqd13Ay1lXyhfPjHIWnpJXuIXEfKKZ5wgpYVCg
+
+{
+  "username": "EngManager1",
+  "password": "123",
+  "role": "manager"
+}
+
+### Register user (Admin role)
+POST http://localhost:9090/auth/register
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc0MDI0OTQ5OCwiZXhwIjoxNzQwMjUzMDk4fQ.TmPaytsduU5L5l10LzGuRQfFmXSHw8FSsv0LEJhrFEA
+
+{
+  "username": "PO2",
+  "password": "123",
+  "role": "technician"
+}
+
+### Add a Ticket (Technician role)
+POST http://localhost:9090/tickets
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQTzEiLCJpYXQiOjE3NDAyMzkyMDgsImV4cCI6MTc0MDI0MjgwOH0.NV6XQs9GAskhJ_3_GJcOVFAEpmxW61H57deveY3yIDM
+
+{
+  "description": "Team ticket 1"
+}
+
+### Get All Tickets (Manager role) and optinally you can provide page, pageSize and sort params
+GET http://localhost:9090/tickets
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJXaWtpY29kaW5nIiwiaWF0IjoxNzQwMzEyMDg0LCJleHAiOjE3NDAzMTU2ODR9.Qs1i2NdxH638uR-6hKTGAzEOtoFZusvxLluyGMgfs0A
+
+### Technicians finds ticket by ticketId
+GET http://localhost:9090/tickets/ticketId/e4eaaaf2-d142-11e1-b3e4-080027620ce0
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQTzEiLCJpYXQiOjE3NDAzMTQ0MzYsImV4cCI6MTc0MDMxODAzNn0.2o2QCffqxu3AnJ9nhzGY1bxHyeO4fLx6LUaTbYAFGdg
+
+### Technicians get their tickets (Technician's role) and optinally you can provide page, pageSize and sort params
+GET http://localhost:9090/tickets/PO1?page=0&pageSize=2&sort=ASC
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQTzEiLCJpYXQiOjE3NDAzMTQ0MzYsImV4cCI6MTc0MDMxODAzNn0.2o2QCffqxu3AnJ9nhzGY1bxHyeO4fLx6LUaTbYAFGdg
+
+### Technicians can mark their Tickets as completed (Techinician's role)
+PATCH http://localhost:9090/tickets/e4eaaaf2-d142-11e1-b3e4-080027620ce0
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQTzEiLCJpYXQiOjE3NDAzMTQ4MTYsImV4cCI6MTc0MDMxODQxNn0.BadA1vLGnfb2iM4HXA_p_silcEiKvUDpQB9dwwjHbZo
+
+### Managers can delete Tickets
+DELETE http://localhost:9090/tickets/e4eaaaf2-d142-11e1-b3e4-080027620cdd
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJXaWtpY29kaW5nIiwiaWF0IjoxNzQwMjQxODkzLCJleHAiOjE3NDAyNDU0OTN9.BdhwMpb0xlSWujrhJVlCY_qwTctWIQH8rtCGg1ghGrg
